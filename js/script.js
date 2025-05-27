@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
     {
       question: "What is VerbaSphere?",
       answer:
-        "VerbaSphere is a modern blogging platform designed to empower writers and connect readers through engaging content and community features.",
+        "VerbaSphere is a modern blogging platform designed to empower writers and connect readers through engaging content and community features.It is capable of changing the rigid human mindset .",
     },
     {
       question: "How do I start writing?",
