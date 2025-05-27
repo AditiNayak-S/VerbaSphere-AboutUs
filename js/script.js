@@ -17,6 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const sections = document.querySelectorAll("section");
   const header = document.querySelector("header");
   const backToTop = document.getElementById("backToTop");
+  
+  // Theme toggle functionality
+  const themeToggle = document.getElementById("themeToggle");
+  const themeIcon = themeToggle.querySelector("i");
 
   // FAQ Functionality
   const faqQuestions = document.querySelectorAll(".faq-question");
@@ -344,5 +348,37 @@ document.addEventListener("DOMContentLoaded", () => {
         this.style.transform = "translateY(0) rotate(0)";
       });
     });
+  }
+
+  // Initialize theme based on user preference or localStorage
+  function initializeTheme() {
+    const savedTheme = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    
+    if (savedTheme === "light" || (!savedTheme && !prefersDark)) {
+      document.body.classList.add("light-mode");
+      themeIcon.classList.replace("fa-moon", "fa-sun");
+    }
+  }
+  
+  // Toggle between light and dark themes
+  function toggleTheme() {
+    if (document.body.classList.contains("light-mode")) {
+      // Switch to dark mode
+      document.body.classList.remove("light-mode");
+      themeIcon.classList.replace("fa-sun", "fa-moon");
+      localStorage.setItem("theme", "dark");
+    } else {
+      // Switch to light mode
+      document.body.classList.add("light-mode");
+      themeIcon.classList.replace("fa-moon", "fa-sun");
+      localStorage.setItem("theme", "light");
+    }
+  }
+  
+  // Add event listener for theme toggle
+  if (themeToggle) {
+    themeToggle.addEventListener("click", toggleTheme);
+    initializeTheme();
   }
 });
