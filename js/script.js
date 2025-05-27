@@ -4,6 +4,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const chatWindow = document.getElementById("chatbotWindow");
   const chatContent = document.getElementById("chatbotContent");
   const closeChat = document.querySelector(".close-chat");
+  
+  // Newsletter functionality
+  const newsletterForm = document.getElementById("newsletter-form");
+  const newsletterMessage = document.getElementById("newsletter-message");
 
   // Navigation
   const menuToggle = document.querySelector(".menu-toggle");
@@ -193,7 +197,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     lastScroll = currentScroll;
   });
-
   // Smooth scroll to top
   backToTop.addEventListener("click", () => {
     window.scrollTo({
@@ -287,9 +290,59 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Initialize
   chatWindow.style.display = "none";
-
   // Set initial display for FAQ answers
   faqAnswers.forEach((answer) => {
     answer.style.display = "none";
   });
+
+  // Newsletter form submission
+  if (newsletterForm) {
+    newsletterForm.addEventListener("submit", function(event) {
+      event.preventDefault();
+      const emailInput = document.getElementById("footer-email");
+      const email = emailInput.value.trim();
+      
+      if (email) {
+        // Simulate form submission
+        newsletterMessage.textContent = "Subscribing...";
+        newsletterMessage.style.color = "var(--gold)";
+        
+        // Simulate API call with timeout
+        setTimeout(() => {
+          emailInput.value = "";
+          newsletterMessage.textContent = "Thank you for subscribing!";
+          newsletterMessage.style.color = "#4CAF50";
+          
+          // Animate the message
+          newsletterMessage.style.animation = "fadeInUp 0.5s ease forwards";
+          
+          // Clear success message after 3 seconds
+          setTimeout(() => {
+            newsletterMessage.style.animation = "fadeOut 0.5s ease forwards";
+            setTimeout(() => {
+              newsletterMessage.textContent = "";
+              newsletterMessage.style.animation = "";
+            }, 500);
+          }, 3000);
+        }, 1000);
+      } else {
+        newsletterMessage.textContent = "Please enter a valid email address";
+        newsletterMessage.style.color = "#f44336";
+      }
+    });
+  }
+
+  // Footer social icon hover effects
+  const socialIcons = document.querySelectorAll('.social-icon');
+  if (socialIcons.length > 0) {
+    socialIcons.forEach(icon => {
+      icon.addEventListener('mouseenter', function() {
+        this.style.transform = "translateY(-5px) rotate(8deg)";
+      });
+      
+      icon.addEventListener('mouseleave', function() {
+        this.style.transform = "translateY(0) rotate(0)";
+      });
+    });
+  }
 });
